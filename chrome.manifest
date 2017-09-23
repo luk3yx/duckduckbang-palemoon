@@ -1,0 +1,3 @@
+content duckduckbang! content/
+
+overlay chrome://browser/content/browser.xul  chrome://duckduckbang!/content/overlay.xul

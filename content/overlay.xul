@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay>
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    
+    <script type="text/javascript"
+        src="chrome://duckduckbang!/content/overlay.js" />
+        
+</overlay>
