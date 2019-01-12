@@ -30,7 +30,7 @@ this.newPage = function(e) {
                 // It may be controversial to chainload the script this way, but
                 // it means that updates can be applied without any reboots,
                 // and the script doesn't need to be pasted here.
-                var url = "https://cdn.rawgit.com/luk3yx/duckduckbang/master/duckduckbang.js";
+                var url = "https://cdn.jsdelivr.net/gh/luk3yx/duckduckbang@master/duckduckbang.js";
                 s = d.createElement('script');
                 s.setAttribute("src", url);
                 d.head.appendChild(s);

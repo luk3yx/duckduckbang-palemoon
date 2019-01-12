@@ -7,7 +7,7 @@
     <em:id>duckduckbang@luk3yx.github.io</em:id>
     <em:name>DuckDuckBang!</em:name>
     <em:description>Allows you to use DuckDuckGo !bangs on Google, Yahoo!, and Bing. (Pale Moon version)</em:description>
-    <em:version>0.1-1</em:version>
+    <em:version>0.1-2</em:version>
     <em:creator>luk3yx</em:creator>
     <em:iconURL>chrome://duckduckbang!/content/icon.png</em:iconURL>
     <em:homepageURL>https://github.com/luk3yx/duckduckbang</em:homepageURL>
