@@ -12,9 +12,54 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 */
 
+function duckduckbang(document) {
+    var window = document.defaultView;
+
+    // Set the prefix(es) redirected to DuckDuckGo
+    // NOTE: They must be 1 character long.
+    // Type: Array
+    // Default: ["\\", "!"]
+    var prefixes = ["\\", "!"];
+
+    // Set the DuckDuckGo URL. The search term will be appended to the url.
+    // Type: String
+    // Default: "https://duckduckgo.com/?q="
+    var url = "https://duckduckgo.com/?q=";
+
+    // Possible query prefixes
+    var queries = ['&q', '?q', '?p', '#q'];
+
+    // Check a URL then redirect to it
+    function go() {
+        var i = -1;
+        for (var c = 0; c < queries.length; c++) {
+            i = window.location.href.indexOf(queries[c] + '=');
+            if (i > 0) {
+                break;
+            }
+        }
+
+        if (i < 1) {
+            return;
+        }
+
+        var search = window.location.href.substr(i + 3).split('&')[0];
+
+        prefix = decodeURIComponent(search).substr(0, 1);
+
+        if (prefixes.includes(prefix)) {
+            window.location.href = url + search;
+        }
+    }
+
+    go();
+
+    window.addEventListener('hashchange', go);
+}
+
 this.newPage = function(e) {
     var d = e.originalTarget;
-    if (d instanceof HTMLDocument && d.duckDuckBangLoaded != true) {
+    if (d instanceof HTMLDocument && ! d.duckDuckBangLoaded) {
         d.duckDuckBangLoaded = true;
         var w = d.defaultView;
         if (w.location.href.indexOf('http') == 0) { // Restricted to HTTP
@@ -26,14 +71,7 @@ this.newPage = function(e) {
             urls = RegExp('^' + urls.join("|").split(".").join("\\.").split("*")
               .join(".*") + '$');
             if (urls.test(w.location.href)) {
-                // The script URL
-                // It may be controversial to chainload the script this way, but
-                // it means that updates can be applied without any reboots,
-                // and the script doesn't need to be pasted here.
-                var url = "https://cdn.jsdelivr.net/gh/luk3yx/duckduckbang@master/duckduckbang.js";
-                s = d.createElement('script');
-                s.setAttribute("src", url);
-                d.head.appendChild(s);
+                duckduckbang(d);
             }
         }
     }
